@@ -12,5 +12,5 @@ class Person
 
 end
 
-result = Person.new("Reena","female",25)
+result = Person.new("John","male",25)
 puts result.name
