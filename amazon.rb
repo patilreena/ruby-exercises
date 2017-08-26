@@ -20,7 +20,10 @@
 #   else
 #     puts "Diseases & Physical Ailments"
 #   end
+
+puts "Welcome to Amazon book store"
 require 'terminal-table'
+require 'colored'
 list = [{
   'name' => 'The Grass is Always Greener',
   'author' => 'Jeffrey Archer',
@@ -82,7 +85,7 @@ list = [{
 class Book
 
   def initialize(name,author,genre)
-    @id = rand(1...1000)
+    # @id = rand(1...1000)
     @name = name
     @author = author
     @genre = genre
@@ -112,9 +115,9 @@ class Library
     @books.push(book)
   end
 
-  def get_book_by_id(id)
-    @books.find{ |book| book.id == id}
-  end
+  # def get_book_by_id(id)
+  #   @books.find{ |book| book.id == id}
+  # end
 
   def get_book_by_name(name)
     @books.find{ |book| book.name == name}
@@ -129,6 +132,7 @@ class Library
   end
 
   def print_books (books)
+    puts "List of the books".red
     rows = []
 
     books.each { |book|
@@ -162,13 +166,18 @@ while true
   books_by_author = library.get_book_by_author(book.author);
   library.print_books(books_by_genre.push(*books_by_author))
   puts "*********************************"
-  puts "Would you like to buy this book?"
-  puts "if yes, please enter the quantity"
+  puts "Would you like to buy this book?[yes/no]"
+  response = gets.chomp
+  if response == "yes"
+  puts "Please enter the quantity"
   quantity = gets.chomp.to_i
   book.buy(quantity)
   puts "Congratulations your shipping is on the way"
   puts "*********************************"
   puts "Here is the updated stock of the book", book.stock
+else
+    puts "That's all right,keep exploring. Thank you for visiting our site."
+  end
   exit
 
 end
